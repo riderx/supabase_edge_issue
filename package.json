@@ -5,15 +5,21 @@
   "scripts": {
     "test:echo": "bun test test/echo.test.ts",
     "test:pg": "bun test test/pg.test.ts",
+    "test:aws-s3": "bun test test/s3.test.ts",
+    "test:supabase-s3": "bun test test/supabase_s3.test.ts",
+    "test:s3": "bun run test:aws-s3 && bun run test:supabase-s3",
     "test": "bun test"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "vitest": "^1.3.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.48.1"
+    "@supabase/supabase-js": "^2.48.1",
+    "@aws-sdk/client-s3": "^3.758.0",
+    "@aws-sdk/s3-request-presigner": "^3.758.0"
   }
 }

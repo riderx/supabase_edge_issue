@@ -1,0 +1,43 @@
+import { S3Client, PutObjectCommand } from 'npm:@aws-sdk/client-s3'
+import { getSignedUrl } from 'npm:@aws-sdk/s3-request-presigner'
+
+const s3Client = new S3Client({
+  region: Deno.env.get('AWS_REGION') || 'us-east-1',
+  credentials: {
+    accessKeyId: Deno.env.get('AWS_ACCESS_KEY_ID') || '',
+    secretAccessKey: Deno.env.get('AWS_SECRET_ACCESS_KEY') || '',
+  },
+})
+console.log('AWS_ACCESS_KEY_ID', Deno.env.get('AWS_ACCESS_KEY_ID'))
+
+Deno.serve(async (req: Request) => {
+  if (req.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405 })
+  }
+
+  try {
+    const { filename, contentType } = await req.json()
+    
+    if (!filename || !contentType) {
+      return new Response('Missing filename or contentType', { status: 400 })
+    }
+
+    const command = new PutObjectCommand({
+      Bucket: Deno.env.get('AWS_BUCKET_NAME') || '',
+      Key: filename,
+      ContentType: contentType,
+    })
+
+    const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 })
+
+    return new Response(JSON.stringify({ url, path: filename }), {
+      headers: { 'Content-Type': 'application/json' },
+    })
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    return new Response(JSON.stringify({ error: errorMessage }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+}) 
