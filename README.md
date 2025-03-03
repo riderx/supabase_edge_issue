@@ -12,4 +12,8 @@ then run the test:
 bun run test:s3
 ```
 
-This will run 2 set of test who should work, using the s3 aws official package or supabase one.
+This will run 3 set of test who should work, using the s3 aws official package or supabase one.
+
+We tried to do with supabase sdk, aws official sdk ( in the code we tried 3 kind of import, none work )
+
+And lastly a pure jsr sdk @bradenmacdonald/s3-lite-client

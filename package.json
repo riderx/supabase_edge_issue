@@ -7,7 +7,8 @@
     "test:pg": "bun test test/pg.test.ts",
     "test:aws-s3": "bun test test/s3.test.ts",
     "test:supabase-s3": "bun test test/supabase_s3.test.ts",
-    "test:s3": "bun run test:aws-s3 && bun run test:supabase-s3",
+    "test:upload-lite": "bun test test/upload_lite.test.ts",
+    "test:s3": "bun run test:aws-s3 && bun run test:supabase-s3 && bun run test:upload-lite",
     "test": "bun test"
   },
   "devDependencies": {
@@ -18,8 +19,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.48.1",
     "@aws-sdk/client-s3": "^3.758.0",
-    "@aws-sdk/s3-request-presigner": "^3.758.0"
+    "@aws-sdk/s3-request-presigner": "^3.758.0",
+    "@bradenmacdonald/s3-lite-client": "npm:@jsr/bradenmacdonald__s3-lite-client",
+    "@supabase/supabase-js": "^2.48.1"
   }
 }

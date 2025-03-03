@@ -1,8 +1,17 @@
-import { S3Client, PutObjectCommand } from 'npm:@aws-sdk/client-s3'
-import { getSignedUrl } from 'npm:@aws-sdk/s3-request-presigner'
+// ANy of this import would work
+// import { S3Client, PutObjectCommand } from 'https://esm.sh/@aws-sdk/client-s3@3.758.0?target=deno'
+// import { getSignedUrl } from 'https://esm.sh/@aws-sdk/s3-request-presigner@3.758.0?target=deno'
+// import { S3Client, PutObjectCommand } from 'https://esm.sh/@aws-sdk/client-s3@3.758.0.0'
+// import { getSignedUrl } from 'https://esm.sh/@aws-sdk/s3-request-presigner@3.758.0'
+import { S3Client, PutObjectCommand } from 'npm:@aws-sdk/client-s3@3.758.0.0'
+import { getSignedUrl } from 'npm:@aws-sdk/s3-request-presigner@3.758.0'
+// import { S3Client, PutObjectCommand } from 'https://jspm.dev/@aws-sdk/client-s3@3.758.0.0'
+// import { getSignedUrl } from 'https://jspm.dev/@aws-sdk/s3-request-presigner@3.758.0'
+
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts'
 
 const s3Client = new S3Client({
+  endPoint: Deno.env.get('AWS_ENDPOINT') || '',
   region: Deno.env.get('AWS_REGION') || 'us-east-1',
   credentials: {
     accessKeyId: Deno.env.get('AWS_ACCESS_KEY_ID') || '',

@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@bradenmacdonald/s3-lite-client": "https://esm.sh/jsr/@bradenmacdonald/s3-lite-client@0.9.0"
+  }
+}
