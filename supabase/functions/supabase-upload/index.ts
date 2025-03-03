@@ -1,4 +1,5 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4'
+import { createClient } from 'npm:@supabase/supabase-js'
+import 'jsr:@supabase/functions-js/edge-runtime.d.ts'
 
 Deno.serve(async (req) => {
   if (req.method !== 'POST') {
