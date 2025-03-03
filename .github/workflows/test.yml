@@ -39,7 +39,5 @@ jobs:
         run: bun --version
       - name: Install dependencies
         run: bun install   
-      - name: Run tests
-        run: bun run test:pg
-      - name: Run tests
-        run: bun run test:echo
+      - name: Run tests s3
+        run: bun run test:s3
