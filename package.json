@@ -4,7 +4,6 @@
   "type": "module",
   "scripts": {
     "test:echo": "bun test test/echo.test.ts",
-    "test:pg": "bun test test/pg.test.ts",
     "test:aws-s3": "bun test test/s3.test.ts",
     "test:supabase-s3": "bun test test/supabase_s3.test.ts",
     "test:upload-lite": "bun test test/upload_lite.test.ts",
