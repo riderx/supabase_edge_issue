@@ -21,7 +21,16 @@ Deno.serve(async (req: Request) => {
       return new Response('Missing filename or contentType', { status: 400 })
     }
 
-    const url = await s3Client.presignedGetObject(filename, { bucketName: Deno.env.get('AWS_BUCKET_NAME') || '', expirySeconds: 3600 })
+    const url = await s3Client.getPresignedUrl('PUT', filename, { 
+      bucketName: Deno.env.get('AWS_BUCKET_NAME') || '', 
+      expirySeconds: 3600,
+      parameters: {
+        'X-Amz-Content-Sha256': 'UNSIGNED-PAYLOAD',
+        'x-amz-checksum-crc32': 'AAAAAA==',
+        'x-amz-sdk-checksum-algorithm': 'CRC32',
+        'x-id': 'PutObject'
+      }
+    })
 
     return new Response(JSON.stringify({ signedUrl: url, path: filename }), {
       headers: { 'Content-Type': 'application/json' },
