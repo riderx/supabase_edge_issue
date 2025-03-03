@@ -16,6 +16,7 @@ describe('Storage Upload', () => {
       body: { filename, contentType: 'text/plain' }
     })
 
+    console.log("data", data)
     expect(error).toBeNull()
     expect(data.signedUrl).toBeDefined()
     expect(typeof data.signedUrl).toBe('string')

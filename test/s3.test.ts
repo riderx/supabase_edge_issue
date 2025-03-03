@@ -15,7 +15,7 @@ describe('Storage Upload', () => {
     const { data, error } = await supabase.functions.invoke('s3-upload', {
       body: { filename, contentType: 'text/plain' }
     })
-
+    console.log("data", data)
     expect(error).toBeNull()
     expect(data.signedUrl).toBeDefined()
     expect(typeof data.signedUrl).toBe('string')
